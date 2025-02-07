@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link href="/style.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-200">
+
+    <div id="app"></div>
+
+    <script>
+        const { createApp, h, reactive } = Vue;
+
+        createApp({
+            setup() {
+                const formData = reactive({ email: "", password: "" });
+                const handleSubmit = (e) => { e.preventDefault(); alert("Connexion réussie !"); };
+
+                return () => h("form", {
+                    class: "form-container",
+                    onsubmit: handleSubmit
+                }, [
+                    h("h2", { class: "text-xl font-semibold text-center" }, "Connexion"),
+                    h("div", [
+                        h("label", { for: "email", class: "block" }, "Email"),
+                        h("input", {
+                            id: "email",
+                            type: "email",
+                            class: "input-field",
+                            placeholder: "Email",
+                            required: true,
+                            onInput: (e) => formData.email = e.target.value
+                        })
+                    ]),
+                    h("div", [
+                        h("label", { for: "password", class: "block" }, "Mot de passe"),
+                        h("input", {
+                            id: "password",
+                            type: "password",
+                            class: "input-field",
+                            placeholder: "Mot de passe",
+                            required: true,
+                            onInput: (e) => formData.password = e.target.value
+                        })
+                    ]),
+                    h("button", {
+                        type: "submit",
+                        class: "submit-btn"
+                    }, "Se connecter")
+                ]);
+            }
+        }).mount("#app");
+    </script>
+
+</body>
+</html>
